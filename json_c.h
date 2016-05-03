@@ -13,9 +13,6 @@ JSON_C_BEGIN_EXTERN_C
 #endif
 
 #include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
  //////////////////////////////////////
  //

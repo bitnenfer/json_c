@@ -1,4 +1,8 @@
 #include "json_c.h"
+#include <stddef.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 #ifndef JSON_C_FORCEINLINE
 #if _MSC_VER
