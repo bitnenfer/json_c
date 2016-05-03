@@ -1,3 +1,12 @@
+#ifndef JSON_C_BEGIN_EXTERN_C 
+#define JSON_C_BEGIN_EXTERN_C extern "C" {
+#endif
+#ifndef JSON_C_END_EXTERN_C
+#define JSON_C_END_EXTERN_C }
+#endif
+#if __cplusplus
+JSON_C_BEGIN_EXTERN_C
+#endif
 #include "json_c.h"
 #include <stddef.h>
 #include <stdint.h>
@@ -129,7 +138,7 @@ JSON_C_FORCEINLINE void json_util_append_token(struct json_lex_tokenstream* stre
 JSON_C_FORCEINLINE char* json_util_copystr(const char* str, size_t size)
 {
 	char* new_str = NULL;
-	new_str = json_malloc(size + 1);
+	new_str = (char*)json_malloc(size + 1);
 	memmove(new_str, str, size);
 	new_str[size] = 0;
 	return new_str;
@@ -680,3 +689,6 @@ int json_contains(struct json_object* object, const char* key)
 {
 	return json_get(object, key) != NULL;
 }
+#if __cplusplus
+JSON_C_END_EXTERN_C
+#endif
