@@ -13,25 +13,25 @@ JSON_C_BEGIN_EXTERN_C
 #endif
 
 #include <stddef.h>
-
- //////////////////////////////////////
- //
- // The user can define custom
- // allocation routines. If none are
- // defined then it'll fallback to
- // C's standard library malloc & free
- //
- //////////////////////////////////////
-
+/*
+//////////////////////////////////////
+//
+// The user can define custom
+// allocation routines. If none are
+// defined then it'll fallback to
+// C's standard library malloc & free
+//
+//////////////////////////////////////
+*/
 static void* (*json_malloc)(size_t) = NULL;
 static void (*json_free)(void* ptr) = NULL;
-
+/*
 //////////////////////////////////////
 //
 // JSON Parse Structs.
 //
 //////////////////////////////////////
-
+*/
 struct json_pair;
 struct json_value;
 
@@ -101,19 +101,19 @@ struct json_error
 	const char* message;
 	int line;
 };
-
+/*
 //////////////////////////////////////
 //
 // Public Declarations
 //
 //////////////////////////////////////
-
+*/
 struct json_value json_parse(const char* text, size_t text_size, struct json_error* error);
 struct json_value* json_get(struct json_object* object, const char* key);
 void json_destroy(struct json_value object);
 int json_contains(struct json_object* object, const char* key);
 
-#endif //JSON_C_H
+#endif /*JSON_C_H*/
 #if __cplusplus
 JSON_C_END_EXTERN_C
 #endif

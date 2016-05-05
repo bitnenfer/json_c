@@ -21,7 +21,7 @@ int main()
 	struct json_value* exclam = NULL;
 	struct json_value root = json_parse(sample, strlen(sample), &error);
 
-	// This is optional.
+	/* This is optional. */
 	json_malloc = &malloc;
 	json_free = &free;
 

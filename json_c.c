@@ -17,7 +17,11 @@ JSON_C_BEGIN_EXTERN_C
 #if _MSC_VER
 #define JSON_C_FORCEINLINE __forceinline
 #else
+#if __STRICT_ANSI__
+#define JSON_C_FORCEINLINE
+#else
 #define JSON_C_FORCEINLINE inline
+#endif
 #endif
 #endif
 #ifndef JSON_C_NEW
@@ -25,12 +29,13 @@ JSON_C_BEGIN_EXTERN_C
 #define JSON_C_NEWARRAY(T, C) (T*)json_malloc(sizeof(T) * C)
 #endif
 
+/*
 //////////////////////////////////////
 //
 // JSON Lexer Structs
 //
 //////////////////////////////////////
-
+*/
 enum JSON_TOKTYPE
 {
 	TOKTYPE_FLOAT,
@@ -68,13 +73,13 @@ struct json_lex_tokenstream
 	struct json_lex_token* head;
 	struct json_lex_token* next;
 };
-
+/*
 //////////////////////////////////////
 //
 // Private Declarations
 //
 //////////////////////////////////////
-
+*/
 void json_util_append_token(struct json_lex_tokenstream* stream, struct json_lex_token* token);
 struct json_lex_token* json_util_newtoken(enum JSON_TOKTYPE token_type);
 struct json_lex_tokenstream* json_util_newtokenstream();
@@ -85,13 +90,13 @@ struct json_value json_parse_value(struct json_lex_token** token, struct json_er
 void json_parse_members(struct json_lex_token** token, struct json_pair* store, size_t element_count, struct json_error* error);
 struct json_object json_parse_object(struct json_lex_token** token, struct json_error* error);
 void json_free_value(struct json_value value);
-
+/*
 //////////////////////////////////////
 //
 // JSON Errors
 //
 //////////////////////////////////////
-
+*/
 #define ERR_JSON_MSG_LEX_INVALID_TOKEN "Invalid Token"
 #define ERR_JSON_MSG_PAR_INVALID_VALUE "Invalid Value"
 #define ERR_JSON_MSG_PAR_MISSING_RSQBR "Missing ]"
@@ -113,13 +118,13 @@ void json_emit_error(struct json_error* error, struct json_lex_token* token, con
 		error->message = error_msg;
 	}
 }
-
+/*
 //////////////////////////////////////
 //
 // JSON Utility Functions
 //
 //////////////////////////////////////
-
+*/
 JSON_C_FORCEINLINE void json_util_append_token(struct json_lex_tokenstream* stream, struct json_lex_token* token)
 {
 	token->line = json_global_line;
@@ -181,13 +186,13 @@ JSON_C_FORCEINLINE void json_util_free_tokenstream(struct json_lex_tokenstream* 
 		json_free(stream);
 	}
 }
-
+/*
 //////////////////////////////////////
 //
 // JSON Lexer Functions
 //
 //////////////////////////////////////
-
+*/
 JSON_C_FORCEINLINE int json_find(const char* text, char test)
 {
 	int index = 0;
@@ -405,13 +410,13 @@ struct json_lex_tokenstream* json_lex(const char* text, size_t text_size, struct
 	}
 	return stream;
 }
-
+/*
 //////////////////////////////////////
 //
 // JSON Parser Functions
 //
 //////////////////////////////////////
-
+*/
 JSON_C_FORCEINLINE int json_simple_hash(const char* string, size_t len)
 {
 	int hash = 5301;
